@@ -1,10 +1,9 @@
 'use strict'
 
-const CalculateConsumptionController = require('./CalculateConsumptionController')
-
 class CompareController {
   constructor () {
     this.compareProducts = this.compareProducts.bind(this)
+    this.calculate = this.calculate.bind(this)
     this.render = this.render.bind(this)
   }
 
@@ -15,10 +14,7 @@ class CompareController {
       .map((product) => {
         return {
           ...product,
-          annualCost: CalculateConsumptionController.calculate(
-            consumption,
-            product
-          )
+          annualCost: this.calculate(consumption, product)
         }
       })
       .sort((a, b) => {
@@ -30,6 +26,20 @@ class CompareController {
       products,
       consumption
     }
+  }
+
+  calculate (consumption, product) {
+    const range = product.prices.filter(({ range: [min, max] }) => {
+      return min <= consumption && consumption <= max
+    })
+
+    const prices = range.map(({ calc }) => {
+      return calc(consumption)
+    })
+
+    const result = Math.min(...prices)
+
+    return result.toFixed(2)
   }
 
   render (req, res) {
