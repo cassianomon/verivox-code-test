@@ -6,6 +6,6 @@ const DashboardController = require('./app/controllers/DashboardController')
 
 routes.get('/', DashboardController.index)
 
-routes.post('/compare', CompareController.compareProducts)
+routes.post('/compare', CompareController.render)
 
 module.exports = routes
