@@ -1,0 +1,59 @@
+{% extends "_layouts/body.njk" %}
+
+{% block body %}
+  <div class="body-wrapper">
+    <div class="d-flex justify-content-center">
+      <h2>Verivox Code Task</h2>
+    </div>
+    <p class="d-flex justify-content-center">
+      Compare energy costs annually
+    </p>
+
+    <div class="row d-flex justify-content-center">
+      <form action="/compare" method="post">
+        <div class="form-row">
+          <div class="col-auto">
+            <input type="number" name="consumption" placeholder="kWh/year" value="{{consumption}}" class="form-control">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-success">Compare</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+      {% for product in products %}
+        <div class="card mt-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">{{product.name}}</h5>
+            <p class="text-center">
+              Base price: {{product.description}}
+            </p>
+
+            {% if product.info %}
+              <small class="text-center">({{product.info}})</small>
+            {% endif %}
+          </div>
+          {% if product.annualCost %}
+            <div class="d-flex">
+              <div class="card-body align-self-end">
+                {% if product.isCheaper %}
+                  <p class="text-center">It's cheaper!</p>
+                  <div class="card m-1 p-2 alert alert-success">
+                    <p class="text-center">Annual cost: €{{product.annualCost}}</p>
+                  </div>
+                {% else %}
+                  <p class="text-center">&nbsp;</p>
+                  <div class="card m-1 p-2 alert alert-danger">
+                    <p class="text-center">Annual cost: €{{product.annualCost}}</p>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
