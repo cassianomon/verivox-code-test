@@ -3,10 +3,12 @@
 const CalculateConsumptionController = require('./CalculateConsumptionController')
 
 class CompareController {
-  async compareProducts (req, res) {
-    const { body } = req
-    const { consumption = 0 } = body
+  constructor () {
+    this.compareProducts = this.compareProducts.bind(this)
+    this.render = this.render.bind(this)
+  }
 
+  async compareProducts (consumption) {
     const productsList = require('../products')
 
     let products = productsList
@@ -20,11 +22,23 @@ class CompareController {
         }
       })
       .sort((a, b) => {
-        a.isCheaper = Number(a.annualCost < b.annualCost)
-        b.isCheaper = Number(b.annualCost < a.annualCost)
+        a.isCheaper = parseFloat(a.annualCost) < parseFloat(b.annualCost)
+        b.isCheaper = parseFloat(b.annualCost) < parseFloat(a.annualCost)
       })
 
-    res.render('compare/index', { products, consumption })
+    return {
+      products,
+      consumption
+    }
+  }
+
+  render (req, res) {
+    const { body } = req
+    const { consumption = 0 } = body
+
+    this.compareProducts(consumption).then(({ products, consumption }) => {
+      res.render('compare/index', { products, consumption })
+    })
   }
 }
 
