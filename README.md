@@ -6,21 +6,21 @@ It is a Node.js REST endpoint with Nunjucks views that allow the user to compare
 
 ### Start the project
 
-- Clone this repository:
+- Clone this repository:   
   `git@github.com:cassianomon/verivox-code-test.git`
-- Enter the project folder:
+- Enter the project folder:   
   `cd verivox-code-test`
-- Install the dependencies:
+- Install the dependencies:   
   `npm install` or `yarn`
-- Start the localhost server:
+- Start the localhost server:   
   `npm start` or `yarn start`
-- Open on your browser:
+- Open on your browser:   
   `localhost:8000`
 
-- To run tests:
+- To run tests:   
   `npm run test` or `yarn test`
 
-- To deploy:
+- To deploy:   
   `npm run deploy` or `yarn deploy`
 
 ### Functionalities
