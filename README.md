@@ -35,5 +35,5 @@ The project was deployed with Now.sh:
 ### What was used to build this project
 
 - [Express](http://expressjs.com/): It is a fast and minimalist web framework for serving web applications written in Node.js.
-- [Nunjucks](https://github.com/mozilla/nunjucks#readme): Templating engine for Javascript to render content.
-- [Jest](https://jestjs.io/): Javascript testing framework
+- [Nunjucks](https://github.com/mozilla/nunjucks#readme): Templating engine for Javascript to render views with HTML.
+- [Jest](https://jestjs.io/): Javascript testing framework.
