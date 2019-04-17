@@ -13,12 +13,22 @@
       <form action="/compare" method="post">
         <div class="form-row">
           <div class="col-auto">
-            <input type="number" name="consumption" placeholder="kWh/year" value="{{consumption}}" class="form-control">
+            <input type="number"
+              min="0"
+              name="consumption"
+              placeholder="kWh/year"
+              value="{{consumption}}"
+              class="form-control"
+            >
           </div>
           <div class="col-auto">
             <button type="submit" class="btn btn-success">Compare</button>
           </div>
         </div>
+        {% if error %}
+          <div class="mt-2 alert alert-danger">{{error}}</div>
+        {% endif %}
+
       </form>
     </div>
 

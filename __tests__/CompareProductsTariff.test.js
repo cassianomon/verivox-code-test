@@ -29,6 +29,34 @@ describe('Comparing 2 products with a valid consumption value should return a pr
   })
 })
 
+const errorMessage = 'is not a valid consumption value'
+
+describe('Comparing 2 products with a invalid consumption value should return a error message', () => {
+  it('Should return a error when consumption is a letter', async () => {
+    const consumption = 'A'
+    const comparingProducts = await CompareController.compareProducts(
+      consumption
+    )
+    expect(comparingProducts.error).toBe(`${consumption} ${errorMessage}`)
+  })
+
+  it('Should return a error when consumption is a boolean', async () => {
+    const consumption = true
+    const comparingProducts = await CompareController.compareProducts(
+      consumption
+    )
+    expect(comparingProducts.error).toBe(`${consumption} ${errorMessage}`)
+  })
+
+  it('Should return a error when consumption is a negative number', async () => {
+    const consumption = -1000
+    const comparingProducts = await CompareController.compareProducts(
+      consumption
+    )
+    expect(comparingProducts.error).toBe(`${consumption} ${errorMessage}`)
+  })
+})
+
 afterAll(async (done) => {
   done()
 })
